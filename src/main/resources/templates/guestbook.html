@@ -36,7 +36,9 @@
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
 					</div>
 					<div class="card-footer">
-						<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
+						<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum
+							<button id="like" onclick="${entry.CountUp()}" th:text="${entry.likes}">+1   0</button>
+						</footer>
 					</div>
 				</div>
 			</div>
