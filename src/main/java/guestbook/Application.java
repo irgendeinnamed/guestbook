@@ -69,7 +69,7 @@ public class Application {
 					.forEach(guestbook::save);
 		};
 	}
-
+	// test for git
 	/**
 	 * This class customizes the web and web security configuration through callback methods provided by the
 	 * {@link WebMvcConfigurer} interface.
