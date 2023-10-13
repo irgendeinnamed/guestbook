@@ -78,7 +78,12 @@ class GuestbookEntry {
 		return text;
 	}
 
-	public void CountUp() {
+	public String getLikes() {return Integer.toString(likes); }
+
+	public String CountUp() {
 		this.likes += 1;
+		return getLikes();
 	}
+
+
 }

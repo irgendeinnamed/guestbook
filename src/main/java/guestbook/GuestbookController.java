@@ -138,6 +138,14 @@ class GuestbookController {
 	 * @return a reference to a Thymeleaf template fragment
 	 * @see #addEntry(String, String)
 	 */
+
+	@HxRequest
+	@PostMapping(path = "/guestbook/likes")
+	HtmxResponse addLike (GuestbookEntry entry, Model model) {
+		model.addAttribute("likes", entry.CountUp());
+		return new HtmxResponse().addTemplate("likes");
+	}
+
 	@HxRequest
 	@PostMapping(path = "/guestbook")
 	HtmxResponse addEntry(@Valid GuestbookForm form, Model model) {

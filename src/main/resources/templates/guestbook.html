@@ -34,10 +34,18 @@
 					</div>
 					<div class="card-body">
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
+						<button type="button"
+								th:method=""
+								id="like"
+								hx:trigger = "click"
+							hx:post = "@{/guestbook/likes}"
+							hx:target = "this"
+						> likes
+						</button>
 					</div>
 					<div class="card-footer">
 						<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum
-							<button id="like" onclick="${entry.CountUp()}" th:text="${entry.likes}">+1   0</button>
+
 						</footer>
 					</div>
 				</div>
