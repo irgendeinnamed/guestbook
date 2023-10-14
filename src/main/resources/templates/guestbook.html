@@ -34,7 +34,7 @@
 					</div>
 					<div class="card-body">
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
-						<form th:action="@{/likes}" th:object="${entry}" method="post">
+						<form th:action="@{/guestbook/countup/{id}(id=${entry.id})}" th:method="post">
 							<button type="submit"
 								class="btn btn-sm float-right"
 								th:text="${entry.likes}">

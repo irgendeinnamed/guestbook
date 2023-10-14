@@ -103,10 +103,11 @@ class GuestbookController {
 		return "redirect:/guestbook";
 	}
 
-	@PostMapping(path="/likes")
-	String addLike(Model model, GuestbookEntry entry) {
-		model.addAttribute("likes", entry.countUp());
-		return "guestbook";
+	@PostMapping(path="/guestbook/countup/{entry}")
+	String addLike(@PathVariable GuestbookEntry entry) {
+		entry.countUp();
+		guestbook.save(entry);
+		return "redirect:/guestbook";
 	}
 
 	/**
