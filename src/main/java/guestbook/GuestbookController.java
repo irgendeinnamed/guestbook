@@ -103,6 +103,12 @@ class GuestbookController {
 		return "redirect:/guestbook";
 	}
 
+	@PostMapping(path="/likes")
+	String addLike(Model model, GuestbookEntry entry) {
+		model.addAttribute("likes", entry.countUp());
+		return "guestbook";
+	}
+
 	/**
 	 * Deletes a {@link GuestbookEntry}. This request can only be performed by authenticated users with admin privileges.
 	 * Also note how the path variable used in the {@link DeleteMapping} annotation is bound to an {@link Optional}
@@ -139,12 +145,12 @@ class GuestbookController {
 	 * @see #addEntry(String, String)
 	 */
 
-	@HxRequest
+	/*@HxRequest
 	@PostMapping(path = "/guestbook/likes")
 	HtmxResponse addLike (GuestbookEntry entry, Model model) {
-		model.addAttribute("likes", entry.CountUp());
+		model.addAttribute("likes", entry.countUp());
 		return new HtmxResponse().addTemplate("likes");
-	}
+	}*/
 
 	@HxRequest
 	@PostMapping(path = "/guestbook")
