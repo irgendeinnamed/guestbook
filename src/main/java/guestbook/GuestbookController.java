@@ -110,6 +110,13 @@ class GuestbookController {
 		return "redirect:/guestbook";
 	}
 
+	@PostMapping(path="/guestbook/countdown/{entry}")
+	String adddislike(@PathVariable GuestbookEntry entry) {
+		entry.countDown();
+		guestbook.save(entry);
+		return "redirect:/guestbook";
+	}
+
 	/**
 	 * Deletes a {@link GuestbookEntry}. This request can only be performed by authenticated users with admin privileges.
 	 * Also note how the path variable used in the {@link DeleteMapping} annotation is bound to an {@link Optional}

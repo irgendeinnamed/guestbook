@@ -34,17 +34,25 @@
 					</div>
 					<div class="card-body">
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
-						<form th:action="@{/guestbook/countup/{id}(id=${entry.id})}" th:method="post">
-							<button type="submit"
-								class="btn btn-sm float-right"
-								th:text="${entry.likes}">
-							</button>
-						</form>
 					</div>
-					<div class="card-footer">
-						<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum
-
+					<div class="card-footer" style="display:flex; width:100%">
+						<footer class="date" style="text-align: start" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum
 						</footer>
+						<div class="likes" style="display: flex;float: right; padding:3px">
+							<form th:action="@{/guestbook/countup/{id}(id=${entry.id})}" th:method="post" >
+								<button type="submit"
+									class="btn btn-sm float-right">
+									▲
+								</button>
+							</form>
+							<label th:text="${entry.likes} + ' like(s)'" style="font-size:14px; padding: 3px"></label>
+							<form th:action="@{/guestbook/countdown/{id}(id=${entry.id})}" th:method="post" >
+								<button type="submit"
+										class="btn btn-sm float-right">
+									▼
+								</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

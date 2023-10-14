@@ -80,11 +80,12 @@ class GuestbookEntry {
 
 	public String getLikes() {return Integer.toString(likes); }
 
-	public String countUp() {
-		System.out.println(likes);
+	public void countUp() {
 		this.likes += 1;
-		System.out.println(likes);
-		return getLikes();
+	}
+
+	public void countDown() {
+		if (this.likes > 0) {this.likes -= 1;}
 	}
 
 
