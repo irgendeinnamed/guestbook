@@ -36,22 +36,34 @@
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
 					</div>
 					<div class="card-footer" style="display:flex; width:100%">
-						<footer class="date" style="text-align: start" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum
+						<footer class="date" style="text-align: start; padding:7px" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum
 						</footer>
-						<div class="likes" style="display: flex;float: right; padding:3px">
-							<form th:action="@{/guestbook/countup/{id}(id=${entry.id})}" th:method="post" >
-								<button type="submit"
-									class="btn btn-sm float-right">
+						<div class="likes" style="display: flex;float: right; padding:3px; width: 40%">
+							<!--<form th:method="post" th:action="@{/guestbook/like/{id}(id=${entry.id})}"> and button type = submit for form submission-->
+								<button type="button"
+										class="rating"
+										hx:post="@{/guestbook/countup/{id}(id=${entry.id})}"
+										hx:swap="innerHTML"
+										th:attr="hx-target=|#likes-${entry.id}|"
+										style="color: #00a41a; float: left">
 									▲
 								</button>
-							</form>
-							<label th:text="${entry.likes} + ' like(s)'" style="font-size:14px; padding: 3px"></label>
-							<form th:action="@{/guestbook/countdown/{id}(id=${entry.id})}" th:method="post" >
-								<button type="submit"
-										class="btn btn-sm float-right">
+							<!--</form>-->
+								<label th:id="|likes-${entry.id}|"
+									   th:fragment="likes"
+									   th:text="${entry.likes} + ' like(s)'"
+									   style="font-size: 14px; width:80%; line-height:30px; text-align: center">
+								</label>
+							<!--<form th:method="post" th:action="@{/guestbook/dislike/{id}(id=${entry.id})}"> and button type = submit for form submission-->
+								<button type="button"
+										class="rating"
+										hx:post="@{/guestbook/countdown/{id}(id=${entry.id})}"
+										hx:swap="innerHTML"
+										th:attr="hx-target=|#likes-${entry.id}|"
+										style="color: #a40002; float: right">
 									▼
 								</button>
-							</form>
+							<!--</form>-->
 						</div>
 					</div>
 				</div>

@@ -78,13 +78,13 @@ class GuestbookEntry {
 		return text;
 	}
 
-	public String getLikes() {return Integer.toString(likes); }
+	public int getLikes() {return likes; }
 
-	public void countUp() {
+	public void like() {
 		this.likes += 1;
 	}
 
-	public void countDown() {
+	public void dislike() {
 		if (this.likes > 0) {this.likes -= 1;}
 	}
 

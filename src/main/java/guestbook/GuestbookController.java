@@ -103,19 +103,19 @@ class GuestbookController {
 		return "redirect:/guestbook";
 	}
 
-	@PostMapping(path="/guestbook/countup/{entry}")
+	/*@PostMapping(path="/guestbook/like/{entry}")
 	String addLike(@PathVariable GuestbookEntry entry) {
-		entry.countUp();
+		entry.like();
 		guestbook.save(entry);
 		return "redirect:/guestbook";
 	}
 
-	@PostMapping(path="/guestbook/countdown/{entry}")
-	String adddislike(@PathVariable GuestbookEntry entry) {
-		entry.countDown();
+	@PostMapping(path="/guestbook/dislike/{entry}")
+	String addDislike(@PathVariable GuestbookEntry entry) {
+		entry.dislike();
 		guestbook.save(entry);
 		return "redirect:/guestbook";
-	}
+	}*/
 
 	/**
 	 * Deletes a {@link GuestbookEntry}. This request can only be performed by authenticated users with admin privileges.
@@ -153,13 +153,6 @@ class GuestbookController {
 	 * @see #addEntry(String, String)
 	 */
 
-	/*@HxRequest
-	@PostMapping(path = "/guestbook/likes")
-	HtmxResponse addLike (GuestbookEntry entry, Model model) {
-		model.addAttribute("likes", entry.countUp());
-		return new HtmxResponse().addTemplate("likes");
-	}*/
-
 	@HxRequest
 	@PostMapping(path = "/guestbook")
 	HtmxResponse addEntry(@Valid GuestbookForm form, Model model) {
@@ -195,5 +188,25 @@ class GuestbookController {
 					.addTemplate("guestbook :: entries");
 
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+
+	@HxRequest
+	@PostMapping(path="/guestbook/countup/{entry}")
+	HtmxResponse addLikeHtmx(@PathVariable GuestbookEntry entry, Model model) {
+		entry.like();
+		return likeUpdate(entry, model);
+	}
+
+	@HxRequest
+	@PostMapping(path="/guestbook/countdown/{entry}")
+	HtmxResponse addDislikeHtmx(@PathVariable GuestbookEntry entry, Model model) {
+		entry.dislike();
+		return likeUpdate(entry, model);
+	}
+
+	HtmxResponse likeUpdate(GuestbookEntry entry, Model model) {
+		guestbook.save(entry);
+		model.addAttribute("likes", entry.getLikes());
+		return new HtmxResponse().addTemplate("guestbook :: likes");
 	}
 }

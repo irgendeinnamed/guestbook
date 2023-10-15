@@ -24,6 +24,10 @@ div#entries, #form {
 	margin-right: 0;
 }
 
+.rating {
+	border-style: none;
+	background-color: transparent;
+}
 
 blockquote {
 	margin: 0;
